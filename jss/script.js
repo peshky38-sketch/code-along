@@ -41,4 +41,18 @@ function showDetails(index) {
 
 // UI LOGIC
 
-document.getElementById("placeForm")
+document.getElementById("placeForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+ const location = document.getElementById("location").value;
+  const landmarks = document.getElementById("landmarks").value;
+  const season = document.getElementById("season").value;
+  const notes = document.getElementById("notes").value;
+
+  const newPlace = new Place(location, landmarks, season, notes);
+
+  places.push(newPlace);
+
+  displayPlaces();
+
+  document.getElementById("placeForm").reset();
+}); 
