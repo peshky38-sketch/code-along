@@ -147,4 +147,4 @@ without restriction, including without limitation the rights to use, copy,
 modify, merge, publish, distribute, sublicense, and/or sell copies of the
 Software.
 
-This project is licensed under the MIT License.
+This project is licsensed under the MIT License.
