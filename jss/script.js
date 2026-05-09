@@ -14,3 +14,27 @@ Place.prototype.fullDetails = function () {
     <p><strong>Notes:</strong> ${this.notes}</p>
   `;
 };
+// APPLICATION LOGIC
+
+let places = [];
+
+function displayPlaces() {
+  const placesList = document.getElementById("places");
+  placesList.innerHTML = "";
+
+  places.forEach(function(place, index) {
+    const li = document.createElement("li");
+    li.innerText = place.location;
+
+    li.addEventListener("click", function() {
+      showDetails(index);
+    });
+
+    placesList.appendChild(li);
+  });
+}
+
+function showDetails(index) {
+  const detailsDiv = document.getElementById("placeDetails");
+  detailsDiv.innerHTML = places[index].fullDetails();
+}
