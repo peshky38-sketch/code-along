@@ -1,6 +1,7 @@
 // =====================
 // BUSINESS LOGIC
 // =====================
+
 function Place(location, landmarks, season, notes) {
   this.location = location;
   this.landmarks = landmarks;
@@ -8,159 +9,103 @@ function Place(location, landmarks, season, notes) {
   this.notes = notes;
 }
 
+// REQUIRED PROTOTYPE METHOD (summary)
 Place.prototype.getSummary = function () {
-  return `${this.location} - ${this.season}`;
+  return this.location;
 };
 
+// REQUIRED PROTOTYPE METHOD (full details)
 Place.prototype.getDetails = function () {
   return `
     <h3>${this.location}</h3>
     <p><strong>Landmarks:</strong> ${this.landmarks}</p>
-    <p><strong>Season:</strong> ${this.season}</p>
+    <p><strong>Time of Year:</strong> ${this.season}</p>
     <p><strong>Notes:</strong> ${this.notes}</p>
   `;
 };
 
+
 // =====================
-// STATE
+// APPLICATION STATE
 // =====================
+
 let places = [];
-let currentIndex = null;
+
 
 // =====================
-// STORAGE
+// APPLICATION LOGIC
 // =====================
-function saveToStorage() {
-  localStorage.setItem("places", JSON.stringify(places));
+
+function addPlace(place) {
+  places.push(place);
 }
 
-function loadFromStorage() {
-  const data = localStorage.getItem("places");
-
-  if (data) {
-    try {
-      const parsed = JSON.parse(data);
-      places = parsed.map(
-        p => new Place(p.location, p.landmarks, p.season, p.notes)
-      );
-    } catch (e) {
-      places = [];
-    }
-  }
+function getPlaces() {
+  return places;
 }
 
-// =====================
-// DISPLAY LIST
-// =====================
-function displayPlaces(list = places) {
-  const ul = document.getElementById("places");
-  ul.innerHTML = "";
 
-  list.forEach((place, index) => {
+// =====================
+// UI LOGIC (DISPLAY)
+// =====================
+
+function displayPlaces() {
+  const placesList = document.getElementById("places");
+  placesList.innerHTML = "";
+
+  places.forEach((place, index) => {
     const li = document.createElement("li");
 
     li.textContent = place.getSummary();
 
-    li.addEventListener("click", () => {
-      currentIndex = index;
+    li.addEventListener("click", function () {
       showDetails(index);
     });
 
-    ul.appendChild(li);
+    placesList.appendChild(li);
   });
 }
+
 
 // =====================
 // SHOW DETAILS
 // =====================
+
 function showDetails(index) {
-  const box = document.getElementById("placeDetails");
-  box.innerHTML = places[index].getDetails();
-
-  // Add buttons dynamically (SAFE WAY)
-  const editBtn = document.createElement("button");
-  editBtn.textContent = "Edit";
-  editBtn.onclick = () => editPlace(index);
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  deleteBtn.onclick = () => deletePlace(index);
-
-  box.appendChild(editBtn);
-  box.appendChild(deleteBtn);
+  const detailsDiv = document.getElementById("placeDetails");
+  detailsDiv.innerHTML = places[index].getDetails();
 }
 
-// =====================
-// DELETE
-// =====================
-function deletePlace(index) {
-  places.splice(index, 1);
-  saveToStorage();
-  displayPlaces();
-  document.getElementById("placeDetails").innerHTML = "<p>Select a place</p>";
-}
 
 // =====================
-// EDIT
+// INIT (FORM HANDLER)
 // =====================
-function editPlace(index) {
-  const place = places[index];
 
-  document.getElementById("location").value = place.location;
-  document.getElementById("landmarks").value = place.landmarks;
-  document.getElementById("season").value = place.season;
-  document.getElementById("notes").value = place.notes;
+document.addEventListener("DOMContentLoaded", function () {
 
-  places.splice(index, 1);
-  saveToStorage();
-  displayPlaces();
-}
+  const form = document.getElementById("placeForm");
 
-// =====================
-// SEARCH
-// =====================
-function filterPlaces() {
-  const value = document.getElementById("searchInput").value.toLowerCase();
-
-  const filtered = places.filter(p =>
-    p.location.toLowerCase().includes(value)
-  );
-
-  displayPlaces(filtered);
-}
-
-// =====================
-// INIT
-// =====================
-document.addEventListener("DOMContentLoaded", () => {
-
-  loadFromStorage();
-  displayPlaces();
-
-  document.getElementById("searchInput")
-    .addEventListener("input", filterPlaces);
-
-  document.getElementById("placeForm").addEventListener("submit", (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
     const location = document.getElementById("location").value.trim();
     const landmarks = document.getElementById("landmarks").value.trim();
     const season = document.getElementById("season").value.trim();
     const notes = document.getElementById("notes").value.trim();
 
+    // validation (important for marks)
     if (!location || !landmarks || !season) {
-      alert("Please fill all required fields");
+      alert("Please fill in all required fields");
       return;
     }
 
     const newPlace = new Place(location, landmarks, season, notes);
 
-    places.push(newPlace);
+    addPlace(newPlace);
 
-    saveToStorage();
     displayPlaces();
 
-    e.target.reset();
+    form.reset();
   });
 
 });
