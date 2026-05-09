@@ -38,3 +38,7 @@ function showDetails(index) {
   const detailsDiv = document.getElementById("placeDetails");
   detailsDiv.innerHTML = places[index].fullDetails();
 }
+
+// UI LOGIC
+
+document.getElementById("placeForm")
