@@ -40,6 +40,10 @@ function addPlace(place) {
   places.push(place);
 }
 
+function removePlace(index) {
+  places.splice(index, 1);
+}
+
 function getPlaces() {
   return places;
 }
@@ -73,7 +77,45 @@ function displayPlaces() {
 
 function showDetails(index) {
   const detailsDiv = document.getElementById("placeDetails");
-  detailsDiv.innerHTML = places[index].getDetails();
+
+  detailsDiv.innerHTML = `
+    ${places[index].getDetails()}
+    <button id="editBtn">Edit</button>
+    <button id="removeBtn">Remove</button>
+  `;
+
+  // REMOVE PLACE
+  document.getElementById("removeBtn")
+    .addEventListener("click", function () {
+
+      removePlace(index);
+
+      displayPlaces();
+
+      detailsDiv.innerHTML = "<p>Place removed.</p>";
+    });
+
+  // EDIT PLACE
+  document.getElementById("editBtn")
+    .addEventListener("click", function () {
+
+      document.getElementById("location").value =
+        places[index].location;
+
+      document.getElementById("landmarks").value =
+        places[index].landmarks;
+
+      document.getElementById("season").value =
+        places[index].season;
+
+      document.getElementById("notes").value =
+        places[index].notes;
+
+      // remove old version before updating
+      removePlace(index);
+
+      displayPlaces();
+    });
 }
 
 
@@ -93,13 +135,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const season = document.getElementById("season").value.trim();
     const notes = document.getElementById("notes").value.trim();
 
-    // validation (important for marks)
+    // validation
     if (!location || !landmarks || !season) {
       alert("Please fill in all required fields");
       return;
     }
 
-    const newPlace = new Place(location, landmarks, season, notes);
+    const newPlace = new Place(
+      location,
+      landmarks,
+      season,
+      notes
+    );
 
     addPlace(newPlace);
 
