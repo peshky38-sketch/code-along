@@ -86,3 +86,118 @@ Contact.prototype.getDetails = function () {
 };
 
 ---
+
+# 🧪 TEST-DRIVEN DEVELOPMENT (TDD)
+
+Describe: Place()
+
+Test: It should create a place object with 4 properties
+
+let place = new Place("Nairobi", "KICC", "December", "Amazing trip");
+
+Expected Output:
+{
+  location: "Nairobi",
+  landmarks: "KICC",
+  season: "December",
+  notes: "Amazing trip"
+}
+
+---
+
+Describe: Place.prototype.getSummary()
+
+Test: It should return the location name
+
+place.getSummary();
+
+Expected Output:
+"Nairobi"
+
+---
+
+Describe: Place.prototype.getDetails()
+
+Test: It should return formatted place details
+
+place.getDetails();
+
+Expected Output:
+HTML formatted string with all place details
+
+---
+
+Describe: addPlace()
+
+Test: It should add a place object to array
+
+addPlace(place);
+
+Expected Output:
+places array increases
+
+---
+
+Describe: removePlace()
+
+Test: It should remove a place from array
+
+removePlace(0);
+
+Expected Output:
+place removed successfully
+
+---
+
+Describe: Contact()
+
+Test: It should create a contact object
+
+let contact = new Contact("Rachel", "Angela", "0712345678", "Nairobi");
+
+Expected Output:
+Contact object created with properties
+
+---
+
+Describe: Contact.prototype.getFullName()
+
+Test: It should return full name
+
+contact.getFullName();
+
+Expected Output:
+"Rachel Angela"
+
+---
+
+Describe: Contact.prototype.getDetails()
+
+Test: It should return formatted contact details
+
+Expected Output:
+HTML formatted contact details
+
+---
+
+Describe: addContact()
+
+Test: It should add contact to array
+
+addContact(contact);
+
+Expected Output:
+contacts array increases
+
+---
+
+Describe: removeContact()
+
+Test: It should remove contact from array
+
+removeContact(0);
+
+Expected Output:
+Contact removed successfully
+
+---
