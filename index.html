@@ -2,42 +2,208 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Places I've Been</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Visited Places & Address Book
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
 </head>
+
 <body>
 
   <div class="container">
-    <h1> Places I've Been</h1>
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <h1>
+       Places I've Been
+    </h1>
+
+
+    <!-- ========================= -->
+    <!-- PLACE FORM -->
+    <!-- ========================= -->
 
     <form id="placeForm">
-      <input type="text" id="location" placeholder="Location" required>
 
-      <input type="text" id="landmarks" placeholder="Landmarks" required>
+      <input
+        type="text"
+        id="location"
+        placeholder="Location"
+        required
+      >
 
-      <input type="text" id="season" placeholder="Time of Year" required>
+      <input
+        type="text"
+        id="landmarks"
+        placeholder="Landmarks"
+        required
+      >
 
-      <textarea id="notes" placeholder="Notes"></textarea>
+      <input
+        type="text"
+        id="season"
+        placeholder="Time of Year"
+        required
+      >
 
-      <button type="submit">Add Place</button>
+      <textarea
+        id="notes"
+        placeholder="Notes"
+      ></textarea>
+
+      <button type="submit">
+        Add Place
+      </button>
+
     </form>
 
+
+
+    <!-- ========================= -->
+    <!-- PLACE CONTENT -->
+    <!-- ========================= -->
+
     <div class="content">
+
+      <!-- LEFT -->
       <div class="places-list">
-        <h2>Visited Places</h2>
+
+        <h2>
+           Visited Places
+        </h2>
+
         <ul id="places"></ul>
+
       </div>
 
+
+      <!-- RIGHT -->
       <div class="details">
-        <h2>Place Details</h2>
+
+        <h2>
+           Place Details
+        </h2>
+
         <div id="placeDetails">
-          <p>Click a place to see details.</p>
+
+          <p>
+            Click a place to see details.
+          </p>
+
         </div>
+
       </div>
+
     </div>
+
+
+
+    <!-- ========================= -->
+    <!-- ADDRESS BOOK SECTION -->
+    <!-- ========================= -->
+
+    <section class="address-book">
+
+      <h1>
+        📒 Address Book
+      </h1>
+
+
+      <!-- CONTACT FORM -->
+
+      <form id="contactForm">
+
+        <input
+          type="text"
+          id="firstName"
+          placeholder="First Name"
+          required
+        >
+
+        <input
+          type="text"
+          id="lastName"
+          placeholder="Last Name"
+          required
+        >
+
+        <input
+          type="text"
+          id="phoneNumber"
+          placeholder="Phone Number"
+          required
+        >
+
+        <input
+          type="text"
+          id="address"
+          placeholder="Address"
+          required
+        >
+
+        <button type="submit">
+          Add Contact
+        </button>
+
+      </form>
+
+
+
+      <!-- CONTACT CONTENT -->
+
+      <div class="content">
+
+        <!-- LEFT -->
+
+        <div class="places-list">
+
+          <h2>
+            👥 Contacts
+          </h2>
+
+          <ul id="contactList"></ul>
+
+        </div>
+
+
+
+        <!-- RIGHT -->
+
+        <div class="details">
+
+          <h2>
+            📞 Contact Details
+          </h2>
+
+          <div id="contactDetails">
+
+            <p>
+              Click a contact to see details.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
   </div>
 
   <script src="js/script.js"></script>
+
 </body>
 </html>
