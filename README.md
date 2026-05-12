@@ -16,17 +16,28 @@ It allows users to:
 - Demonstrate test-driven development (TDD)
 
 ---
-# 🚀 Live Site
+#  Live Site
 
 GitHub Pages Link:
 https://your-github-pages-link-here
 
 ---
 
-# 🛠 Technologies Used
+# Technologies Used
 
 - HTML
 - CSS
 - JavaScript
+
+---
+
+#  Setup Instructions
+
+1. Clone the repository:
+git clone https://github.com/your-username/your-repo-name.git
+
+2. Open the project folder
+
+3. Open index.html in your browser
 
 ---
