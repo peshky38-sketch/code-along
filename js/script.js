@@ -1,5 +1,11 @@
+// ======================================================
+// ================= BUSINESS LOGIC =====================
+// ======================================================
+
+
+
 // =====================
-// BUSINESS LOGIC
+// PLACE CONSTRUCTOR
 // =====================
 
 function Place(location, landmarks, season, notes) {
@@ -9,95 +15,173 @@ function Place(location, landmarks, season, notes) {
   this.notes = notes;
 }
 
-// REQUIRED PROTOTYPE METHOD (summary)
+// PLACE PROTOTYPE METHODS
+
 Place.prototype.getSummary = function () {
   return this.location;
 };
 
-// REQUIRED PROTOTYPE METHOD (full details)
 Place.prototype.getDetails = function () {
   return `
     <h3>${this.location}</h3>
-    <p><strong>Landmarks:</strong> ${this.landmarks}</p>
-    <p><strong>Time of Year:</strong> ${this.season}</p>
-    <p><strong>Notes:</strong> ${this.notes}</p>
+
+    <p><strong>Landmarks:</strong>
+    ${this.landmarks}</p>
+
+    <p><strong>Time of Year:</strong>
+    ${this.season}</p>
+
+    <p><strong>Notes:</strong>
+    ${this.notes}</p>
   `;
 };
 
 
+
 // =====================
-// APPLICATION STATE
+// CONTACT CONSTRUCTOR
 // =====================
+
+
+
+// ======================================================
+// ================= APPLICATION STATE ==================
+// ======================================================
 
 let places = [];
+let contacts = [];
+
+let editingPlaceIndex = null;
+let editingContactIndex = null;
+
+
+
+// ======================================================
+// ================= APPLICATION LOGIC ==================
+// ======================================================
+
 
 
 // =====================
-// APPLICATION LOGIC
+// PLACE LOGIC
 // =====================
 
 function addPlace(place) {
   places.push(place);
 }
 
+function updatePlace(index, updatedPlace) {
+  places[index] = updatedPlace;
+}
+
 function removePlace(index) {
   places.splice(index, 1);
 }
 
-function getPlaces() {
-  return places;
+
+
+// =====================
+// CONTACT LOGIC
+// =====================
+
+function addContact(contact) {
+  contacts.push(contact);
+}
+
+function updateContact(index, updatedContact) {
+  contacts[index] = updatedContact;
+}
+
+function removeContact(index) {
+  contacts.splice(index, 1);
 }
 
 
+
+// ======================================================
+// ===================== UI LOGIC =======================
+// ======================================================
+
+
+
 // =====================
-// UI LOGIC (DISPLAY)
+// DISPLAY PLACES
 // =====================
 
 function displayPlaces() {
-  const placesList = document.getElementById("places");
+
+  const placesList =
+    document.getElementById("places");
+
   placesList.innerHTML = "";
 
   places.forEach((place, index) => {
+
     const li = document.createElement("li");
 
     li.textContent = place.getSummary();
 
     li.addEventListener("click", function () {
-      showDetails(index);
+
+      showPlaceDetails(index);
+
     });
 
     placesList.appendChild(li);
+
   });
+
 }
 
 
+
 // =====================
-// SHOW DETAILS
+// SHOW PLACE DETAILS
 // =====================
 
-function showDetails(index) {
-  const detailsDiv = document.getElementById("placeDetails");
+function showPlaceDetails(index) {
+
+  const detailsDiv =
+    document.getElementById("placeDetails");
 
   detailsDiv.innerHTML = `
     ${places[index].getDetails()}
-    <button id="editBtn">Edit</button>
-    <button id="removeBtn">Remove</button>
+
+    <div class="button-group">
+
+      <button id="editPlaceBtn">
+        Edit
+      </button>
+
+      <button id="removePlaceBtn">
+        Remove
+      </button>
+
+    </div>
   `;
 
+
   // REMOVE PLACE
-  document.getElementById("removeBtn")
+
+  document.getElementById("removePlaceBtn")
     .addEventListener("click", function () {
 
       removePlace(index);
 
       displayPlaces();
 
-      detailsDiv.innerHTML = "<p>Place removed.</p>";
+      detailsDiv.innerHTML =
+        "<p>Place removed successfully.</p>";
+
     });
 
+
   // EDIT PLACE
-  document.getElementById("editBtn")
+
+  document.getElementById("editPlaceBtn")
     .addEventListener("click", function () {
+
+      editingPlaceIndex = index;
 
       document.getElementById("location").value =
         places[index].location;
@@ -111,48 +195,281 @@ function showDetails(index) {
       document.getElementById("notes").value =
         places[index].notes;
 
-      // remove old version before updating
-      removePlace(index);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-      displayPlaces();
     });
+
 }
 
 
+
 // =====================
-// INIT (FORM HANDLER)
+// DISPLAY CONTACTS
 // =====================
+
+function displayContacts() {
+
+  const contactList =
+    document.getElementById("contactList");
+
+  contactList.innerHTML = "";
+
+  contacts.forEach((contact, index) => {
+
+    const li = document.createElement("li");
+
+    li.textContent = contact.getFullName();
+
+    li.addEventListener("click", function () {
+
+      showContactDetails(index);
+
+    });
+
+    contactList.appendChild(li);
+
+  });
+
+}
+
+
+
+// =====================
+// SHOW CONTACT DETAILS
+// =====================
+
+function showContactDetails(index) {
+
+  const detailsDiv =
+    document.getElementById("contactDetails");
+
+  detailsDiv.innerHTML = `
+    ${contacts[index].getDetails()}
+
+    <div class="button-group">
+
+      <button id="editContactBtn">
+        Edit
+      </button>
+
+      <button id="removeContactBtn">
+        Remove
+      </button>
+
+    </div>
+  `;
+
+
+  // REMOVE CONTACT
+
+  document.getElementById("removeContactBtn")
+    .addEventListener("click", function () {
+
+      removeContact(index);
+
+      displayContacts();
+
+      detailsDiv.innerHTML =
+        "<p>Contact removed successfully.</p>";
+
+    });
+
+
+  // EDIT CONTACT
+
+  document.getElementById("editContactBtn")
+    .addEventListener("click", function () {
+
+      editingContactIndex = index;
+
+      document.getElementById("firstName").value =
+        contacts[index].firstName;
+
+      document.getElementById("lastName").value =
+        contacts[index].lastName;
+
+      document.getElementById("phoneNumber").value =
+        contacts[index].phoneNumber;
+
+      document.getElementById("address").value =
+        contacts[index].address;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+}
+
+
+
+// ======================================================
+// ===================== FORM LOGIC =====================
+// ======================================================
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const form = document.getElementById("placeForm");
 
-  form.addEventListener("submit", function (event) {
+
+
+  // ===================================================
+  // PLACE FORM
+  // ===================================================
+
+  const placeForm =
+    document.getElementById("placeForm");
+
+
+  placeForm.addEventListener("submit", function (event) {
+
     event.preventDefault();
 
-    const location = document.getElementById("location").value.trim();
-    const landmarks = document.getElementById("landmarks").value.trim();
-    const season = document.getElementById("season").value.trim();
-    const notes = document.getElementById("notes").value.trim();
+    const location =
+      document.getElementById("location")
+        .value
+        .trim();
 
-    // validation
+    const landmarks =
+      document.getElementById("landmarks")
+        .value
+        .trim();
+
+    const season =
+      document.getElementById("season")
+        .value
+        .trim();
+
+    const notes =
+      document.getElementById("notes")
+        .value
+        .trim();
+
+
+    // VALIDATION
+
     if (!location || !landmarks || !season) {
-      alert("Please fill in all required fields");
+
+      alert("Please fill in all place fields.");
+
       return;
     }
 
-    const newPlace = new Place(
+
+    const place = new Place(
       location,
       landmarks,
       season,
       notes
     );
 
-    addPlace(newPlace);
+
+    // EDIT MODE
+
+    if (editingPlaceIndex !== null) {
+
+      updatePlace(editingPlaceIndex, place);
+
+      editingPlaceIndex = null;
+
+    } else {
+
+      // ADD MODE
+
+      addPlace(place);
+    }
+
 
     displayPlaces();
 
-    form.reset();
+    placeForm.reset();
+
+  });
+
+
+
+
+
+  // ===================================================
+  // CONTACT FORM
+  // ===================================================
+
+  const contactForm =
+    document.getElementById("contactForm");
+
+
+  contactForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    const firstName =
+      document.getElementById("firstName")
+        .value
+        .trim();
+
+    const lastName =
+      document.getElementById("lastName")
+        .value
+        .trim();
+
+    const phoneNumber =
+      document.getElementById("phoneNumber")
+        .value
+        .trim();
+
+    const address =
+      document.getElementById("address")
+        .value
+        .trim();
+
+
+    // VALIDATION
+
+    if (
+      !firstName ||
+      !lastName ||
+      !phoneNumber ||
+      !address
+    ) {
+
+      alert("Please fill in all contact fields.");
+
+      return;
+    }
+
+
+    const contact = new Contact(
+      firstName,
+      lastName,
+      phoneNumber,
+      address
+    );
+
+
+    // EDIT MODE
+
+    if (editingContactIndex !== null) {
+
+      updateContact(editingContactIndex, contact);
+
+      editingContactIndex = null;
+
+    } else {
+
+      // ADD MODE
+
+      addContact(contact);
+    }
+
+
+    displayContacts();
+
+    contactForm.reset();
+
   });
 
 });
