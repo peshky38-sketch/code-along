@@ -19,7 +19,7 @@ It allows users to:
 #  Live Site
 
 GitHub Pages Link:
-https://your-github-pages-link-here
+https://peshky38-sketch.github.io/code-along/
 
 ---
 
