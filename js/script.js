@@ -42,6 +42,34 @@ Place.prototype.getDetails = function () {
 // CONTACT CONSTRUCTOR
 // =====================
 
+function Contact(firstName, lastName, phoneNumber, address) {
+
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.phoneNumber = phoneNumber;
+  this.address = address;
+}
+
+// CONTACT PROTOTYPE METHODS
+
+Contact.prototype.getFullName = function () {
+
+  return `${this.firstName} ${this.lastName}`;
+};
+
+Contact.prototype.getDetails = function () {
+
+  return `
+    <h3>${this.getFullName()}</h3>
+
+    <p><strong>Phone:</strong>
+    ${this.phoneNumber}</p>
+
+    <p><strong>Address:</strong>
+    ${this.address}</p>
+  `;
+};
+
 
 
 // ======================================================
