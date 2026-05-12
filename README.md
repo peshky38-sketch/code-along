@@ -87,7 +87,7 @@ Contact.prototype.getDetails = function () {
 
 ---
 
-# 🧪 TEST-DRIVEN DEVELOPMENT (TDD)
+#  TEST-DRIVEN DEVELOPMENT (TDD)
 
 Describe: Place()
 
@@ -199,5 +199,20 @@ removeContact(0);
 
 Expected Output:
 Contact removed successfully
+
+---
+
+#  Features
+
+- Add places
+- View place details
+- Edit places
+- Remove places
+- Add contacts
+- View contact details
+- Edit contacts
+- Remove contacts
+- Dynamic UI updates
+- Form validation
 
 ---
