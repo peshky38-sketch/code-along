@@ -16,3 +16,17 @@ It allows users to:
 - Demonstrate test-driven development (TDD)
 
 ---
+# 🚀 Live Site
+
+GitHub Pages Link:
+https://your-github-pages-link-here
+
+---
+
+# 🛠 Technologies Used
+
+- HTML
+- CSS
+- JavaScript
+
+---
