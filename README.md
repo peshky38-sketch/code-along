@@ -34,7 +34,7 @@ https://your-github-pages-link-here
 #  Setup Instructions
 
 1. Clone the repository:
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/peshky38-sketch/code-along
 
 2. Open the project folder
 
